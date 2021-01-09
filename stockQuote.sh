@@ -15,9 +15,9 @@
 #  for 1000 (one thousand) requests per month at their website.
 #
 #  Examples:
-#      $ export API_TOKEN=YOUR_API_TOKEN_HERE
-#      $ ./stockQuote.sh -e [exchange] -t [ticker]
-#      $ ./stockQuote.sh -e BVMF -t PETR3
+#      $ export API_TOKEN_MARKETSTACK=YOUR_API_TOKEN_HERE
+#      $ ./stockQuote.sh [exchange] [ticker]
+#      $ ./stockQuote.sh BVMF PETR3
 #      
 #      In this example, the price of the PETR3 stock on the BVMF stock exchange 
 #      (Brazilian stock exchange) will be displayed.
