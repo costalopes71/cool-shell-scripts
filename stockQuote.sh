@@ -53,10 +53,16 @@ RED="\033[031;1m"
 
 [ $# -ne 2 ] && echo -e "${RED}[ERROR] Missing required parameters. Usage: stockQuote [TICKER.EXCHANGE] [DATE]" && exit 1
 
+# TODO is curl installed?
+# TODO is jq installed?
+
 ############################################################################
 # EXECUTION
 ############################################################################
 
 RESPONSE=$( curl -s "$MARKETSTACK_ENDPOINT" )
+
+# TODO parse response with jq
+# TODO display open, close, max and min formated and with color
 
 echo "$RESPONSE"
