@@ -38,6 +38,10 @@
 # VARIABLES
 ############################################################################
 
+MARKETSTACK_API_TOKEN="$MARKETSTACK_API_TOKEN"
+MARKETSTACK_ENDPOINT="http://api.marketstack.com/v1/eod?access_token=$MARKETSTACK_API_TOKEN"
+
+RED="\033[031;1m"
 
 ############################################################################
 # FUNCTIONS
