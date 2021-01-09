@@ -1,16 +1,13 @@
 #! /usr/bin/env bash
 
-# stockQuote.sh - Displays the value of the closing, opening, minimum 
-# and maximum share price
+# stockQuote.sh - Displays the value of the closing, opening, minimun and maximum share price
 #
 # Site:       
 # Author:      Joao Lopes
 # Maintainer: Joao Lopes
 #
 # ------------------------------------------------------------------------ #
-#  This program quotes the opening, closing, minimum and maximum value of 
-#  a given stock on a given stock exchange in the world based on the API of
-#  marketstack (https://marketstack.com/).
+#  This program quotes the opening, closing, minimum and maximum value of a given stock on a given stock exchange in the world based on the API of marketstack (https://marketstack.com/).
 #  For using it, export the variable API_TOKEN, you can get a free token
 #  for 1000 (one thousand) requests per month at their website.
 #
