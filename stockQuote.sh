@@ -50,8 +50,9 @@ RED="\033[031;1m"
 
 [ $# -ne 2 ] && echo -e "${RED}[ERROR] Missing required parameters. Usage: stockQuote [TICKER.EXCHANGE] [DATE]" && exit 1
 
-# TODO is curl installed?
-# TODO is jq installed?
+[ ! -x "$( which curl )" ] && echo -e "${RED}[ERROR] Missing required dependencie curl. Install: sudo apt install curl" && exit 2
+
+[ ! -x "$( which jq )" ] && echo -e "${RED}[ERROR] Missing required dependencie jq. Install: sudo apt install jq" && exit 2
 
 ############################################################################
 # EXECUTION
