@@ -52,6 +52,7 @@ RED="\033[031;1m"
 # TESTS
 ############################################################################
 
+[ $# -ne 2 ] && echo -e "${RED}[ERROR] Missing required parameters. Usage: stockQuote [EXCHANGE] [TICKER]" && exit 1
 
 ############################################################################
 # EXECUTION
