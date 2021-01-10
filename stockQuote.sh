@@ -38,11 +38,17 @@ MARKETSTACK_API_TOKEN="$MARKETSTACK_API_TOKEN"
 MARKETSTACK_ENDPOINT="http://api.marketstack.com/v1/eod?access_key=${MARKETSTACK_API_TOKEN}&symbols=$1&date_from=$2&date_to=$2"
 
 RED="\033[031;1m"
+BLUE="\033[34;1m"
+GREEN="\033[32;1m"
+YELLOW="\033[33;1m"
 
 ############################################################################
 # FUNCTIONS
 ############################################################################
 
+ExtractData() {
+	echo "$( echo "$1" | jq .data[0].$2 )"
+}
 
 ############################################################################
 # TESTS
@@ -60,7 +66,14 @@ RED="\033[031;1m"
 
 RESPONSE=$( curl -s "$MARKETSTACK_ENDPOINT" )
 
-# TODO parse response with jq
-# TODO display open, close, max and min formated and with color
+ERROR_MESSAGE="$( echo $RESPONSE | jq .error.message )"
 
-echo "$RESPONSE"
+[ "$ERROR_MESSAGE" != "null" ] && echo -e "$RED[ERROR] Could not get stock quote at marketstack endpoint. Error message: $ERROR_MESSAGE" && exit 3
+
+OPEN="${YELLOW}open: $( ExtractData $RESPONSE "open" )"
+CLOSE="${BLUE}close: $( ExtractData $RESPONSE "close" )"
+MAX="${GREEN}max: $( ExtractData $RESPONSE "high" )"
+MIN="${RED}min: $( ExtractData $RESPONSE "low" )"
+
+echo "  ${1}"
+echo -e "\t$OPEN\n\t$CLOSE\n\t$MAX\n\t$MIN"
