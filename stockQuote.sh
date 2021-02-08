@@ -70,10 +70,15 @@ ERROR_MESSAGE="$( echo $RESPONSE | jq .error.message )"
 
 [ "$ERROR_MESSAGE" != "null" ] && echo -e "$RED[ERROR] Could not get stock quote at marketstack endpoint. Error message: $ERROR_MESSAGE" && exit 3
 
-OPEN="${YELLOW}open: $( ExtractData $RESPONSE "open" )"
-CLOSE="${BLUE}close: $( ExtractData $RESPONSE "close" )"
-MAX="${GREEN}max: $( ExtractData $RESPONSE "high" )"
-MIN="${RED}min: $( ExtractData $RESPONSE "low" )"
+OPEN="open: $( ExtractData $RESPONSE "open" )"
+CLOSE="close: $( ExtractData $RESPONSE "close" )"
+MAX="max: $( ExtractData $RESPONSE "high" )"
+MIN="min: $( ExtractData $RESPONSE "low" )"
 
 echo "  ${1}"
-echo -e "\t$OPEN\n\t$CLOSE\n\t$MAX\n\t$MIN"
+
+OUTPUT="${YELLOW}\t$OPEN\n${BLUE}\t$CLOSE\n${GREEN}\t$MAX\n${RED}\t$MIN"
+
+echo -e "$OUTPUT"
+
+notify-send --expire-time=1000 "${1}: $OPEN $CLOSE $MAX $MIN"
