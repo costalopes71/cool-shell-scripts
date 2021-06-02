@@ -1,0 +1,12 @@
+m : exibe o valor de memoria usada usando uma barra (apertar mais 1x exibe a barra com preenchimento e mais uma vez tira a linha de memoria)
+t : exibe o valor de cpu em uso usando uma barra (apertar mais 1x exibe a barra com preenchimento e mais uma vez tira a linha da cpu)
+P : ordena por CPU
+M : ordena por memoria
+T : ordena por Tempo
+N : ordena por PID
+c : mostra o comando todo executado
+n : quantidade de linhas a serem exibidas
+k : matar um PID
+u : permite escolher os processos de um determinado usuario
+1 : mostra os valores de cada CPU
+
