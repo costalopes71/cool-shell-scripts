@@ -1,5 +1,4 @@
-Moving Cursor:
-
+Navegacao:
 j --> move o cursor uma linha para baixo
 k --> move o cursor uma linha para cima
 h --> move o cursor um caracter para tras
@@ -16,8 +15,7 @@ M --> move o cursor para a linha do meio da tela
 L --> move o cursor para a ultima linha da tela
 H --> move o cursor para a primeira linha da tela
 
-Inserindo/Adicionando texto
-
+Digitacao:
 i --> insere texto antes do cursor
 I --> insere texto no comeco da linha 
 a --> insere texto depois do cursor
@@ -25,8 +23,7 @@ A --> insere texto no final da linha
 o --> insere uma nova linha abaixo e adiciona texto
 O --> insere uma nova linha acima e adiciona texto
 
-Alterando texto
-
+Alteracao:
 r --> altera um unico caracter onde esta o cursor
 R --> altera caracteres comecando de onde esta o cursor ate terminar teclando esc
 cw --> faz o replace da palavra onde o cursor esta por um novo texto
@@ -35,8 +32,7 @@ C --> faz o replace da linha toda pelo texto que irei escrever
 cc --> nao entendi a diferenca do de cima
 ncc --> faz o replace de N linhas comecando pela linha atual
 
-Deletando texto
-
+Delecao:
 x --> deleta um caracter 
 Nx --> deleta N caracteres
 dw --> deleta a palavra toda
@@ -45,17 +41,14 @@ D --> deleta o restante da linha a comecar do cursor
 dd --> deleta a linha toda
 Ndd --> deleta N linhas
 
-Recortar e colar texto
-
+Recortar/Colar:
 yy --> copia a linha
 Nyy --> copia N linhas
 p --> cola
 
-Comandos bruxao
-
+Bruxaria:
 ~ + barra_espaco --> altera o case de um caracter
 ~ + enter --> altera o case da linha toda
 J --> junta as linhas (a do cursor com a debaixo)
 >> --> shifta a linha para a direita
 << --> shifta a linha para a esquerda
-
