@@ -1,0 +1,96 @@
+Index
+1. Sessions
+2. Windows
+3. Panels
+4. Copy Mode
+5. Misc
+6. Help
+7. Custom
+
+1. Sessions:
+
+start new --> tmux [or] tmux new [or] tmux new-session [or] :new
+start named --> tmux new -s mysession [or] :new -s mysession
+kill named --> tmux kill-ses -t mysession [or] tmux kill-session -t mysession
+kill all but current --> tmux kill-session -a
+kill all but named --> tmux kill-session -a -t mysession
+rename --> ctrl+b $
+dettach --> ctrl+b d
+attach --> :attach -d
+show all --> tmux ls [or] tmux list-sessions [or] ctrl+b s
+attach to last --> tmux a [or] tmux at [or] tmux attach
+attach to named --> tmux a -t mysession [or] tmux at -t mysession [or] tmux attach -t mysession
+move to previous --> ctrl+b (
+move to next --> )
+
+2. Windows
+
+create --> ctrl+b c
+rename current --> ctrl+b ,
+close current --> ctrl+b &
+previous --> ctrl+b p
+next --> ctrl+b n
+select by number --> ctrl+b 0..9
+reorder window swaping (src/dest)  --> :snap-window -s 2 -t 1
+move current to left by n position --> :snap-window -t -1
+move between --> alt left/right
+
+3. Panes
+
+last active --> ctrl+b ;
+split vertically --> ctrl+b %
+split horizontally --> ctrl+b "
+move left --> ctrl+b {
+move right --> ctrl+b }
+switch to pane --> ctrl+b up/down/left/right
+synchronize all --> :setw synchronize-panes
+toogle between layouts --: ctrl+b Spacebar
+next --> ctrl+b o
+zoom --> ctrl+b z
+convert to window --> ctrl+b !
+resize --> hold ctrl+b up/down/left/right
+close --> ctrl+b x
+
+4. Copy Mode
+
+enter copy mode --> ctrl+b [
+quit mode --> q
+search forward --> /
+search backward --> ?
+next occurance --> n
+previos occurance --> N
+start selection --> spacebar
+clear selection --> esc
+copy selection --> enter
+paste contents of buffer_0 --> ctrl+b ]
+diplay buffer content --> :show-buffer
+copy entire visible contents of pane to a buffer --> :capture-pane
+list buffers --> :list-buffers
+save buffer to file --> :save-buffer buf.txt
+
+5. Misc
+
+enter command mode --> ctrl+b :
+set OPTION for all sessions --> :set -g OPTION
+set OPTION for all windows  --> :setw -g OPTION
+
+6. Help
+
+show every session, window, pane, etc --> tmux info
+show shortcuts --> ctrl+b ?
+
+
+7. Custom:
+
+prefix tmux key instead of ctrl+b --> ctrl+g
+kill all sessions --> ctrl+b q
+
+
+
+
+
+
+
+
+
+
