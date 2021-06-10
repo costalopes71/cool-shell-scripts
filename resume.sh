@@ -46,7 +46,7 @@ Supported commands: vi, top, tmux
 
 Usage example:
   $ resume vi
-  $ resume vi 0
+  $ resume vi 0 # index 0 always show an index with the content of that command
   $ resume top
   $ resume tmux
   $ resume tmux 3
