@@ -222,7 +222,8 @@ kill all sessions --> ctrl+b q"
 CMD_TMUX_ALL="$CMD_TMUX_0\n\n$CMD_TMUX_1\n\n$CMD_TMUX_2\n\n$CMD_TMUX_3\n\n$CMD_TMUX_4\n\n$CMD_TMUX_5\n\n$CMD_TMUX_6\n\n$CMD_TMUX_7"
 
 CMD_LINUX_0="0. Index
-1. File Permissions"
+1. File Permissions
+2. Groups"
 
 CMD_LINUX_1="1. File Permissions
 
@@ -235,16 +236,26 @@ chmod u+rw,g-rw,u-rwx example.txt --> add read and write permission for the onwe
 5 or r-x --> read and execute
 6 or rw- --> read and write
 7 or rwx --> read, write and execute
-chown <user> <file> --> changes the owner of a file
+chown <user> <file> --> changes the owner of a file"
+
+CMD_LINUX_2="2. Groups
+
 cat /etc/passwd --> display primary user group
 cat /etc/group  --> display secondary user groups
 groups          --> display secondary user groups
-groups <user>   --> display all groups a user belongs (the girst group is the primary group)
+groups <user>   --> display all groups a user belongs (the first group is the primary group)
 id <user>       --> display user id (uid), the user's primary group (gid) and the user's secondary groups (groups)
 id              --> same as abose but for the current user
-getent group <user> --> list all members of a group"
+getent group <user> --> list all members of a group
+sudo usermod -a -G groupname username --> adds an existing user to a group
+sudo usermod -a -G group1,group2 username --> adds existing user to group1 and group2
+sudo gpasswd -d username groupname --> remove a user from a group
+sudo groupadd groupname --> create a new group
+sudo groupdel groupname --> delete an existing group
+sudo usermod -g groupname username --> change a user primary group
+sudo useradd -g primarygroup -G group1,group2 joao --> create a new user named Joao with primary group and secodanry groups"
 
-CMD_LINUX_ALL="$CMD_LINUX_0\n\n$CMD_LINUX_1"
+CMD_LINUX_ALL="$CMD_LINUX_0\n\n$CMD_LINUX_1\n\n$CMD_LINUX_2"
 
 ########################################################
 # FUNCTIONS
@@ -284,9 +295,10 @@ printTmuxCommands()	{
 
 printLinuxCommands() {
 	case "$1" in
-		0) echo "$CMD_LINUX_0" && exit 0     ;;
-		1) echo "$CMD_LINUX_1" && exit 0     ;;
-		*) echo -e "$CMD_LINUX_ALL" && exit 0   ;;
+		0) echo "$CMD_LINUX_0" && exit 0       ;;
+		1) echo "$CMD_LINUX_1" && exit 0       ;;
+		2) echo "$CMD_LINUX_2" && exit 0       ;;
+		*) echo -e "$CMD_LINUX_ALL" && exit 0  ;;
 	esac
 }
 
