@@ -1,0 +1,17 @@
+0. Index
+1. File Permissions
+
+1. File Permissions
+
+chmod u+rw,g-rw,u-rwx example.txt --> add read and write permission for the onwer (user), drop read and write permission for groups and drop read write and execute permission for other
+0 or --- --> no permissions
+1 or --x --> execute
+2 or -w- --> write
+3 or -wx --> write and execute
+4 or r-- --> read
+5 or r-x --> read and execute
+6 or rw- --> read and write
+7 or rwx --> read, write and execute
+chown <user> <file> --> changes the owner of a file
+
+

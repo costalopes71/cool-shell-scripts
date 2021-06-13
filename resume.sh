@@ -42,7 +42,7 @@ HELP="Usage: resume [command] [index]
 
 This program is intended to facilitate the resumes of my most used commands.
 
-Supported commands: vi, top, tmux
+Supported commands: vi, top, tmux, linux
 
 Usage example:
   $ resume vi
@@ -50,6 +50,7 @@ Usage example:
   $ resume top
   $ resume tmux
   $ resume tmux 3
+  $ resume linux 0
 "
 
 CMD_VI_0="0. Index
@@ -220,6 +221,31 @@ kill all sessions --> ctrl+b q"
 
 CMD_TMUX_ALL="$CMD_TMUX_0\n\n$CMD_TMUX_1\n\n$CMD_TMUX_2\n\n$CMD_TMUX_3\n\n$CMD_TMUX_4\n\n$CMD_TMUX_5\n\n$CMD_TMUX_6\n\n$CMD_TMUX_7"
 
+CMD_LINUX_0="0. Index
+1. File Permissions"
+
+CMD_LINUX_1="1. File Permissions
+
+chmod u+rw,g-rw,u-rwx example.txt --> add read and write permission for the onwer (user), drop read and write permission for groups and drop read write and execute permission for other
+0 or --- --> no permissions
+1 or --x --> execute
+2 or -w- --> write
+3 or -wx --> write and execute
+4 or r-- --> read
+5 or r-x --> read and execute
+6 or rw- --> read and write
+7 or rwx --> read, write and execute
+chown <user> <file> --> changes the owner of a file
+cat /etc/passwd --> display primary user group
+cat /etc/group  --> display secondary user groups
+groups          --> display secondary user groups
+groups <user>   --> display all groups a user belongs (the girst group is the primary group)
+id <user>       --> display user id (uid), the user's primary group (gid) and the user's secondary groups (groups)
+id              --> same as abose but for the current user
+getent group <user> --> list all members of a group"
+
+CMD_LINUX_ALL="$CMD_LINUX_0\n\n$CMD_LINUX_1"
+
 ########################################################
 # FUNCTIONS
 ########################################################
@@ -256,6 +282,14 @@ printTmuxCommands()	{
 
 }
 
+printLinuxCommands() {
+	case "$1" in
+		0) echo "$CMD_LINUX_0" && exit 0     ;;
+		1) echo "$CMD_LINUX_1" && exit 0     ;;
+		*) echo -e "$CMD_LINUX_ALL" && exit 0   ;;
+	esac
+}
+
 ########################################################
 # EXECUTION
 ########################################################
@@ -264,6 +298,7 @@ case "$1" in
 	vi) printViCommands $2 && exit 0       ;;
 	top) printTopCommands && exit 0        ;;
 	tmux) printTmuxCommands $2 && exit 0   ;;
+	linux) printLinuxCommands $2 && exit 0 ;;
 	*) echo "$HELP" && exit 0              ;;
 esac
 
