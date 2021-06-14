@@ -59,7 +59,8 @@ CMD_VI_0="0. Index
 3. Alter text
 4. Cut text
 5. Copy/Paste
-6. Magic
+6. Undo/Redo
+7. Magic
 "
 
 CMD_VI_1="1. Navegacao:
@@ -110,7 +111,13 @@ yy --> copia a linha
 Nyy --> copia N linhas
 p --> cola"
 
-CMD_VI_6="6. Bruxaria:
+CMD_VI_6="6. Undo/Redo:
+u --> undo change
+:u [or] :undo --> undo changes
+ctrl + r --> redo
+:redo --> redo"
+
+CMD_VI_7="7. Bruxaria:
 ~ + barra_espaco --> altera o case de um caracter
 ~ + enter --> altera o case da linha toda
 J --> junta as linhas (a do cursor com a debaixo)
@@ -118,7 +125,7 @@ J --> junta as linhas (a do cursor com a debaixo)
 << --> shifta a linha para a esquerda
 "
 
-CMD_VI_ALL="$CMD_VI_0\n\n$CMD_VI_1\n\n$CMD_VI_2\n\n$CMD_VI_3\n\n$CMD_VI_4\n\n$CMD_VI_5\n\n$CMD_VI_6"
+CMD_VI_ALL="$CMD_VI_0\n\n$CMD_VI_1\n\n$CMD_VI_2\n\n$CMD_VI_3\n\n$CMD_VI_4\n\n$CMD_VI_5\n\n$CMD_VI_6\n\n$CMD_VI_7"
 
 CMD_TOP_ALL="m --> exibe o valor de memoria usada usando uma barra (apertar mais 1x exibe a barra com preenchimento e mais uma vez tira a linha de memoria)
 t --> exibe o valor de cpu em uso usando uma barra (apertar mais 1x exibe a barra com preenchimento e mais uma vez tira a linha da cpu)
@@ -223,7 +230,8 @@ CMD_TMUX_ALL="$CMD_TMUX_0\n\n$CMD_TMUX_1\n\n$CMD_TMUX_2\n\n$CMD_TMUX_3\n\n$CMD_T
 
 CMD_LINUX_0="0. Index
 1. File Permissions
-2. Groups"
+2. Groups
+3. Journal"
 
 CMD_LINUX_1="1. File Permissions
 
@@ -255,7 +263,90 @@ sudo groupdel groupname --> delete an existing group
 sudo usermod -g groupname username --> change a user primary group
 sudo useradd -g primarygroup -G group1,group2 joao --> create a new user named Joao with primary group and secodanry groups"
 
-CMD_LINUX_ALL="$CMD_LINUX_0\n\n$CMD_LINUX_1\n\n$CMD_LINUX_2"
+CMD_LINUX_3="3. Journal
+
+journalctl          
+    display all logs from initializations, services, initdr etc
+journalctl -b
+    display all logs from the last initialization
+journalctl --utc
+    display all logs with utc time
+journalctl --list-boots
+    display all initializations persisted
+journalctl -b -33
+    display logs from initialization 33
+journalctl -b <hash>
+    same as above
+journalctl --since \"YYYY-MM-DD HH:MM:SS\" --until \"YYYY-MM-DD HH:MM:SS\"
+    display logs between since and until
+journalctl --since yesterday
+    display logs since yesterday
+journalctl --since 09:00 --until \"1 hour ago\"
+    display logs from 9am until 1 hour ago
+journalctl -u <service>
+    display logs from that service (ex: journalctl -u ngnix.service
+journalctl -u <service> --since today
+    display logs from service from today
+journalctl _PID=<pid>
+    display logs from that pid
+journalctl _UID=<uid>
+    display logs only from that user
+journalctl _GID=<gid>
+    display logs only from that group
+man systemd.journal-fields
+    display all fields that we can use to filter
+journalctl -F _UID
+    display all uids that journal contains on its log
+journalctl -F <field>
+    same as above but for other field
+journalctl --disk-usage
+    display how much disk space its been used
+journalctl --vacuum-size=500M
+    delete logs until it reachs 500M
+journalctl --vacuum-time=1years
+    clean all logs but from 1 year
+journalctl <executable_path>
+    display logs from the executable. Example: journalctl /usr/bin/bash
+journalctl -k
+    display kernel messages from current initialization
+journalctl -k -b -5
+    display kernel messages from initialization 5
+journalctl -p <log_level>
+    display log messages only from that level and up
+    log levels:
+        0: emerg
+        1: alert
+        2: crit
+        3: err
+        4: warning
+        5: notice
+        6: info
+        7: debug
+journalctl --no-pager
+    do not page the result
+journalctl -o json
+    display logs on json format
+journalctl -o json-pretty
+    display logs on json pretty format
+    formats:
+        cat: exibe apenas o campo de mensagem em si.
+        export: um formato binário adequado para transferir e fazer um backup.
+        json: JSON padrão com uma entrada por linha.
+        json-pretty: JSON formatado para uma melhor legibilidade humana
+        json-sse: saída formatada em JSON agrupada para tornar um evento enviado ao servidor compatível
+        short: o estilo de saída padrão do syslog
+        short-iso: o formato padrão aumentado para mostrar as carimbos de data/hora da ISO 8601.
+        short-monotonic: o formato padrão com carimbos de data/hora monotônicos.
+        short-precise: o formato padrão com precisão de microssegundos
+        verbose: exibe todas os campos de diário disponíveis para a entrada, incluindo aqueles que geralmente estão escondidos internamente.
+journalctl -n
+    display last 10 logs
+journalctl -n <number_of_lines>
+    display N number of lines
+journalctl -f
+    keep monitoring the logs on real time"
+
+CMD_LINUX_ALL="$CMD_LINUX_0\n\n$CMD_LINUX_1\n\n$CMD_LINUX_2\n\n$CMD_LINUX_3"
 
 ########################################################
 # FUNCTIONS
@@ -270,6 +361,7 @@ printViCommands() {
 		4) echo "$CMD_VI_4" && exit 0         ;;
 		5) echo "$CMD_VI_5" && exit 0         ;;
 		6) echo "$CMD_VI_6" && exit 0         ;;
+		7) echo "$CMD_VI_7" && exit 0         ;;
 		*) echo -e "$CMD_VI_ALL" && exit 0    ;;
 	esac
 }
@@ -298,6 +390,7 @@ printLinuxCommands() {
 		0) echo "$CMD_LINUX_0" && exit 0       ;;
 		1) echo "$CMD_LINUX_1" && exit 0       ;;
 		2) echo "$CMD_LINUX_2" && exit 0       ;;
+		3) echo "$CMD_LINUX_3" && exit 0       ;;
 		*) echo -e "$CMD_LINUX_ALL" && exit 0  ;;
 	esac
 }

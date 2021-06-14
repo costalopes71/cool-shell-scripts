@@ -1,5 +1,6 @@
 0. Index
 1. File Permissions
+2. Groups
 
 1. File Permissions
 
@@ -14,4 +15,74 @@ chmod u+rw,g-rw,u-rwx example.txt --> add read and write permission for the onwe
 7 or rwx --> read, write and execute
 chown <user> <file> --> changes the owner of a file
 
+2. Groups
+
+cat /etc/passwd --> display primary user group
+cat /etc/group  --> display secondary user groups
+groups          --> display secondary user groups
+groups <user>   --> display all groups a user belongs (the first group is the primary group)
+id <user>       --> display user id (uid), the user's primary group (gid) and the user's secondary groups (groups)
+id              --> same as abose but for the current user
+getent group <user> --> list all members of a group
+sudo usermod -a -G groupname username --> adds an existing user to a group
+sudo usermod -a -G group1,group2 username --> adds existing user to group1 and group2
+sudo gpasswd -d username groupname --> remove a user from a group
+sudo groupadd groupname --> create a new group
+sudo groupdel groupname --> delete an existing group
+sudo usermod -g groupname username --> change a user primary group
+sudo useradd -g primarygroup -G group1,group2 joao --> create a new user named Joao with primary group and secodanry groups
+
+3. Journal
+
+journalctl        --> display all logs from initializations, services, initdr etc
+journalctl -b     --> display all logs from the last initialization
+journalctl --utc  --> display all logs with utc time
+journalctl --list-boots  --> display all initializations persisted
+journalctl -b -33 --> display logs from initialization 33
+journalctl -b <hash> --> same as above
+journalctl --since "YYYY-MM-DD HH:MM:SS" --until "YYYY-MM-DD HH:MM:SS" --> display logs between since and until
+journalctl --since yesterday --> display logs since yesterday
+journalctl --since 09:00 --until "1 hour ago" --> display logs from 9am until 1 hour ago
+journalctl -u <service> --> display logs from that service (ex: journalctl -u ngnix.service
+journalctl -u <service> --since today --> display logs from service from today
+journalctl _PID=<pid>   --> display logs from that pid
+journalctl _UID=<uid>   --> display logs only from that user
+journalctl _GID=<gid>   --> display logs only from that group
+man systemd.journal-fields --> display all fields that we can use to filter
+journalctl -F _UID --> display all uids that journal contains on its log
+journalctl -F <field> --> same as above but for other field
+journalctl --disk-usage --> display how much disk space its been used
+journalctl --vacuum-size=500M --> delete logs until it reachs 500M
+journalctl --vacuum-time=1years --> clean all logs but from 1 year
+journalctl <executable_path> --> display logs from the executable. Example: journalctl /usr/bin/bash
+journalctl -k --> display kernel messages from current initialization
+journalctl -k -b -5 --> display kernel messages from initialization 5
+journalctl -p <log_level> --> display log messages only from that level and up
+log levels:
+	0: emerg
+	1: alert
+	2: crit
+	3: err
+	4: warning
+	5: notice
+	6: info
+	7: debug
+journalctl --no-pager --> do not page the result
+journalctl -o json --> display logs on json format
+journalctl -o json-pretty --> display logs on json pretty format
+formats:
+	cat: exibe apenas o campo de mensagem em si.
+	export: um formato binário adequado para transferir e fazer um backup.
+	json: JSON padrão com uma entrada por linha.
+	json-pretty: JSON formatado para uma melhor legibilidade humana
+	json-sse: saída formatada em JSON agrupada para tornar um evento enviado ao servidor compatível
+	short: o estilo de saída padrão do syslog
+	short-iso: o formato padrão aumentado para mostrar as carimbos de data/hora da ISO 8601.
+	short-monotonic: o formato padrão com carimbos de data/hora monotônicos.
+	short-precise: o formato padrão com precisão de microssegundos
+	verbose: exibe todas os campos de diário disponíveis para a entrada, incluindo aqueles que geralmente estão escondidos internamente.
+
+journalctl -n  --> display last 10 logs
+journalctl -n <number_of_lines>  --> display N number of lines
+journalctl -f  --> keep monitoring the logs on real time
 
