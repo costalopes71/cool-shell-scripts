@@ -459,7 +459,7 @@ CMD_LINUX_0="0. Index
 
 CMD_LINUX_1="1. File Permissions
 
-chmod u+rw,g-rw,u-rwx example.txt
+chmod u+rw,g-rw,o-rwx example.txt
     add read and write permission for the onwer (user), drop read and write permission for groups and drop read write and execute permission for other
 
 0 or ---
