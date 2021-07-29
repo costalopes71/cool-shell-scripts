@@ -455,7 +455,8 @@ CMD_TMUX_ALL="$CMD_TMUX_0\n\n$CMD_TMUX_1\n\n$CMD_TMUX_2\n\n$CMD_TMUX_3\n\n$CMD_T
 CMD_LINUX_0="0. Index
 1. File Permissions
 2. Groups
-3. Journal"
+3. Journal
+4. Filesystem"
 
 CMD_LINUX_1="1. File Permissions
 
@@ -644,8 +645,29 @@ journalctl -n <number_of_lines>
 
 journalctl -f
     keep monitoring the logs on real time"
+
+CMD_LINUX_4="4. Filesystem 
+
+du -h -d <depth> -t <treshold>
+    list the total size of each directories and files filtering the output by the treshold. Example: du -h -d 1 -t 500M /home/ubuntu
+
+lsblk
+    show all disks, mounted partitions and unmonted partitions
+
+df
+    show disk usage and other informations of each mounted partition
+
+mount <device> <dir>
+    mounts a partition in the specified directory. Example: mount /dev/sdb3 /media/second_hd
+
+/etc/fstab
+    file that contains entries that will make the partition mount permanent.
+
+sudo blkid
+   print block device attributes. For example the UUID of a partition
+"
 	
-CMD_LINUX_ALL="$CMD_LINUX_0\n\n$CMD_LINUX_1\n\n$CMD_LINUX_2\n\n$CMD_LINUX_3"
+CMD_LINUX_ALL="$CMD_LINUX_0\n\n$CMD_LINUX_1\n\n$CMD_LINUX_2\n\n$CMD_LINUX_3\n\n$CMD_LINUX_4"
 
 ########################################################
 # FUNCTIONS
@@ -661,7 +683,8 @@ printViCommands() {
 		5) echo "$CMD_VI_5" && exit 0         ;;
 		6) echo "$CMD_VI_6" && exit 0         ;;
 		7) echo "$CMD_VI_7" && exit 0         ;;
-		*) echo -e "$CMD_VI_ALL" && exit 0    ;;
+		all) echo -e "$CMD_VI_ALL" && exit 0  ;;
+		*) echo -e "$CMD_VI_0" && exit 0      ;;
 	esac
 }
 
@@ -671,26 +694,28 @@ printTopCommands() {
 
 printTmuxCommands()	{
 	case "$1" in
-		0) echo "$CMD_TMUX_0" && exit 0      ;;
-		1) echo "$CMD_TMUX_1" && exit 0      ;;
-		2) echo "$CMD_TMUX_2" && exit 0      ;;
-		3) echo "$CMD_TMUX_3" && exit 0      ;;
-		4) echo "$CMD_TMUX_4" && exit 0      ;;
-		5) echo "$CMD_TMUX_5" && exit 0      ;;
-		6) echo "$CMD_TMUX_6" && exit 0      ;;
-		7) echo "$CMD_TMUX_7" && exit 0      ;;
-		*) echo -e "$CMD_TMUX_ALL" && exit 0 ;;
+		0) echo "$CMD_TMUX_0" && exit 0        ;;
+		1) echo "$CMD_TMUX_1" && exit 0        ;;
+		2) echo "$CMD_TMUX_2" && exit 0        ;;
+		3) echo "$CMD_TMUX_3" && exit 0        ;;
+		4) echo "$CMD_TMUX_4" && exit 0        ;;
+		5) echo "$CMD_TMUX_5" && exit 0        ;;
+		6) echo "$CMD_TMUX_6" && exit 0        ;;
+		7) echo "$CMD_TMUX_7" && exit 0        ;;
+		all) echo -e "$CMD_TMUX_ALL" && exit 0 ;;
+		*) echo -e "$CMD_TMUX_0" && exit 0     ;;
 	esac
 
 }
 
 printLinuxCommands() {
 	case "$1" in
-		0) echo "$CMD_LINUX_0" && exit 0       ;;
-		1) echo "$CMD_LINUX_1" && exit 0       ;;
-		2) echo "$CMD_LINUX_2" && exit 0       ;;
-		3) echo "$CMD_LINUX_3" && exit 0       ;;
-		*) echo -e "$CMD_LINUX_ALL" && exit 0  ;;
+		0) echo "$CMD_LINUX_0" && exit 0         ;;
+		1) echo "$CMD_LINUX_1" && exit 0         ;;
+		2) echo "$CMD_LINUX_2" && exit 0         ;;
+		3) echo "$CMD_LINUX_3" && exit 0         ;;
+		all) echo -e "$CMD_LINUX_ALL" && exit 0  ;;
+		*) echo -e "$CMD_LINUX_0" && exit 0      ;;
 	esac
 }
 
