@@ -714,6 +714,7 @@ printLinuxCommands() {
 		1) echo "$CMD_LINUX_1" && exit 0         ;;
 		2) echo "$CMD_LINUX_2" && exit 0         ;;
 		3) echo "$CMD_LINUX_3" && exit 0         ;;
+		4) echo "$CMD_LINUX_4" && exit 0         ;;
 		all) echo -e "$CMD_LINUX_ALL" && exit 0  ;;
 		*) echo -e "$CMD_LINUX_0" && exit 0      ;;
 	esac
