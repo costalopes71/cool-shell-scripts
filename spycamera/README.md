@@ -46,7 +46,7 @@ sudo crontab -e
 - Now, for the e-mail to be sent as soon as the PC get internet connectivity, add `spycam` script to `/etc/network/if-up.d`
 - Be sure that the file added is owned by root user
 - Input the e-mail you want to receive the alert on the script at the last line of the script replacing TYPE_HERE_THE_EMAIL_YOU_WANT_TO_RECEIVE_THIS_MESSAGE with the e-mail you want.
-- Give execution permission to the script: sudo chmod +x spycam
+- Give execution permission to the script: `sudo chmod +x spycam`
 - test:
   - reebot yout PC
   - a new image should have been created at `tmp` directory
