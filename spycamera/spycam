@@ -1,0 +1,21 @@
+#!/bin/sh
+
+picture=$(cat /tmp/lastspypic.txt)
+flagfile=/var/run/spypic-already-done
+
+case "$IFACE" in
+	lo)
+		exit 0
+		;;
+	*)
+		;;
+esac
+
+if [ -e $flagfile ]; then
+	exit 0;
+else
+	touch $flagfile 
+fi
+
+
+echo "Your PC has been booted at $(date). The photo of the person trying to boot it is atteched." | mail <TYPE_HERE_THE_EMAIL_YOU_WANT_TO_RECEIVE_THIS_MESSAGE> -A $picture --subject=loginattempt > /tmp/spycamlogs.txt 2>&1
