@@ -18,4 +18,4 @@ else
 fi
 
 
-echo "Your PC has been booted at $(date). The photo of the person trying to boot it is atteched." | mail <TYPE_HERE_THE_EMAIL_YOU_WANT_TO_RECEIVE_THIS_MESSAGE> -A $picture --subject=loginattempt > /tmp/spycamlogs.txt 2>&1
+echo "Your PC has been booted at $(date). The photo of the person trying to boot it is attached." | mail <TYPE_HERE_THE_EMAIL_YOU_WANT_TO_RECEIVE_THIS_MESSAGE> -A $picture --subject=loginattempt > /tmp/spycamlogs.txt 2>&1
