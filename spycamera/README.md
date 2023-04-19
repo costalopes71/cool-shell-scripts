@@ -2,8 +2,8 @@
 It's a shell script that you can use to take a picture of the person trying to turn on or boot your PC and receive it by e-mail.
 
 # How does it works?
-The first script (spycam.sh) can be located anywhere you want, this script is the code responsible for taking a picture with you webcam and saving it on the ```/tmp``` directory.
-In order to this work at your machine startup we add a crontab for your root user to execute it at startup/reboot.
+The first script (spycam.sh) can be located anywhere you want, this script is the code responsible for taking a picture with your webcam and saving it on ```/tmp``` directory.
+In order for this to work on startup we add a crontab for your root user to execute it at startup/reboot.
 
 The second script (spycam) is placed at ```/etc/network/if-up.d```, this directory contains shell scritps that should be run as soon as your computer has internet connectivity, and the code in this script is responsible for sending the e-mail with the picture to you! :D
 
@@ -45,7 +45,7 @@ sudo crontab -e
     - reboot and test again
 - Now, for the e-mail to be sent as soon as the PC get internet connectivity, add `spycam` script to `/etc/network/if-up.d`
 - Be sure that the file added is owned by root user
-- Input the e-mail you want to receive the alert on the script at the last line of the script replacing TYPE_HERE_THE_EMAIL_YOU_WANT_TO_RECEIVE_THIS_MESSAGE with the e-mail you want.
+- Input the e-mail you want to receive the alert on the script at the last line of the script replacing `TYPE_HERE_THE_EMAIL_YOU_WANT_TO_RECEIVE_THIS_MESSAGE` with the e-mail you want.
 - Give execution permission to the script: `sudo chmod +x spycam`
 - test:
   - reebot yout PC
