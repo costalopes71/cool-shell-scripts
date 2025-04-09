@@ -1,0 +1,28 @@
+#!/bin/bash
+sleep 1
+NOW=$(date '+%Y-%m-%d_%H-%M')
+
+# Caminhos
+IMG_REF="/opt/security/photo_reference.jpg"
+IMG_TEMP="/tmp/snapshot.jpg"
+AUDIO_OUT="/home/joao.lopes/security/audio_$NOW.wav"
+IMG_OUT="/home/joao.lopes/security/snapshot_$NOW.jpg"
+
+# Tirar foto
+ffmpeg -y -f v4l2 -video_size 1280x720 -i /dev/video0 -frames:v 1 \
+	-vf "eq=brightness=0.2:contrast=1.2,unsharp=5:5:1.0:5:5:0.0" \
+	-update 1 "$IMG_TEMP"
+
+# Rodar o reconhecimento facial
+python3 /opt/security/face_check.py $IMG_TEMP $IMG_REF
+
+# Verificar retorno
+if [ $? -ne 0 ]; then
+    cp $IMG_TEMP $IMG_OUT
+    # Gravar áudio 
+    arecord -D plughw:0,6 -f cd -t wav -d 30 $AUDIO_OUT
+    #arecord -d 30 -f cd -t wav $AUDIO_OUT
+fi
+
+rm $IMG_TEMP
+
