@@ -1,0 +1,14 @@
+[Unit]
+Description=Boot Security Monitor (Photo + Audio + Face Detection)
+DefaultDependencies=no
+After=sound.target local-fs.target
+Before=graphical.target
+
+[Service]
+Type=simple
+ExecStart=/opt/security/safe-login
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

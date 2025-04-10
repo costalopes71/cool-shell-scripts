@@ -5,8 +5,8 @@ NOW=$(date '+%Y-%m-%d_%H-%M')
 # Caminhos
 IMG_REF="/opt/security/photo_reference.jpg"
 IMG_TEMP="/tmp/snapshot.jpg"
-AUDIO_OUT="/home/joao.lopes/security/audio_$NOW.wav"
-IMG_OUT="/home/joao.lopes/security/snapshot_$NOW.jpg"
+AUDIO_OUT="/home/[YOUR_FOLDER_HERE]/security/audio_$NOW.wav"
+IMG_OUT="/home/[YOUR_FOLDER_HERE]/security/snapshot_$NOW.jpg"
 
 # Tirar foto
 ffmpeg -y -f v4l2 -video_size 1280x720 -i /dev/video0 -frames:v 1 \
@@ -21,7 +21,6 @@ if [ $? -ne 0 ]; then
     cp $IMG_TEMP $IMG_OUT
     # Gravar áudio 
     arecord -D plughw:0,6 -f cd -t wav -d 30 $AUDIO_OUT
-    #arecord -d 30 -f cd -t wav $AUDIO_OUT
 fi
 
 rm $IMG_TEMP
